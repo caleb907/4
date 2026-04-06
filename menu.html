@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spudtacular | Menu</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">🥔 SPUDTACULAR</div>
+            <ul class="nav-menu">
+                <li><a href="/">Home</a></li>
+                <li><a href="/menu.html" class="active">Menu</a></li>
+                <li><a href="/customize.html">Customize</a></li>
+                <li><a href="/cart.html">Cart 🛒</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <section class="page-header">
+            <h1>OUR MENU</h1>
+            <p>Try our signature loaded jacket potatoes with premium toppings and fresh ingredients.</p>
+            <p class="starting-price">Starts at <strong>₱99</strong></p>
+        </section>
+
+        <section class="menu-section">
+            <h2>Classic</h2>
+            <div id="classic-items" class="menu-grid"></div>
+        </section>
+
+        <section class="menu-section">
+            <h2>Signature</h2>
+            <div id="signature-items" class="menu-grid"></div>
+        </section>
+
+        <section class="menu-section">
+            <h2>Premium</h2>
+            <div id="premium-items" class="menu-grid"></div>
+        </section>
+
+        <section class="addons-section">
+            <h2>Add Ons</h2>
+            <div id="addons-list" class="addons-grid"></div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>🥔 Spudtacular — The art of jacket potato</p>
+            <p>Fresh daily · Local ingredients · Made with love</p>
+            <p>© 2026 Spudtacular. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Load menu items
+        fetch('/api/menu')
+            .then(res => res.json())
+            .then(menu => {
+                const classic = menu.filter(m => m.category === 'classic');
+                const signature = menu.filter(m => m.category === 'signature');
+                const premium = menu.filter(m => m.category === 'premium');
+                
+                renderMenuItems('classic-items', classic);
+                renderMenuItems('signature-items', signature);
+                renderMenuItems('premium-items', premium);
+            });
+        
+        // Load addons
+        fetch('/api/addons')
+            .then(res => res.json())
+            .then(addons => {
+                const container = document.getElementById('addons-list');
+                container.innerHTML = addons.map(a => `
+                    <div class="addon-item">
+                        <span>${a.name}</span>
+                        <span class="price">+₱${a.price}</span>
+                    </div>
+                `).join('');
+            });
+        
+        function renderMenuItems(containerId, items) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            container.innerHTML = items.map(item => `
+                <div class="menu-card">
+                    <img src="/images/${item.image}" alt="${item.name}">
+                    <h3>${item.name}</h3>
+                    <p class="price">₱${item.price}</p>
+                    <button class="btn-add" onclick="addToCart(${item.id}, '${item.name}', ${item.price})">Add to Cart</button>
+                </div>
+            `).join('');
+        }
+    </script>
+    <script src="/app.js"></script>
+</body>
+</html>

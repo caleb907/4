@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spudtacular | Best Jacket Potatoes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #FFFFFF;
+            color: #1a1a1a;
+            line-height: 1.5;
+        }
+
+        /* Header */
+        .header {
+            background: #FFFFFF;
+            border-bottom: 1px solid #e5e5e5;
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #b45f2b;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #4a4a4a;
+            font-weight: 500;
+            transition: color 0.2s;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: #b45f2b;
+        }
+
+        /* Main Layout */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Welcome Section */
+        .welcome {
+            text-align: center;
+            padding: 2rem 1rem 1rem;
+        }
+
+        .welcome h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #b45f2b;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Menu Section */
+        .menu-section {
+            background: #faf9f8;
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .menu-section h2 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #2c2418;
+            margin-bottom: 0.5rem;
+        }
+
+        .menu-section .description {
+            color: #666;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .price-start {
+            font-size: 1rem;
+            margin: 1rem 0;
+        }
+
+        .price-start strong {
+            color: #b45f2b;
+            font-size: 1.3rem;
+        }
+
+        .order-btn {
+            background: #b45f2b;
+            color: white;
+            border: none;
+            padding: 0.7rem 1.8rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border-radius: 30px;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            margin: 0.5rem 0;
+            transition: background 0.2s;
+        }
+
+        .order-btn:hover {
+            background: #9a4f22;
+        }
+
+        .quality-text {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 1rem;
+        }
+
+        /* Best Seller Section */
+        .best-seller {
+            background: #faf9f8;
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .best-seller h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #b45f2b;
+            margin-bottom: 0.5rem;
+        }
+
+        .best-seller p {
+            color: #4a4a4a;
+            font-size: 0.95rem;
+        }
+
+        /* Operation Hours */
+        .operation {
+            background: #faf9f8;
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .operation h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #b45f2b;
+            margin-bottom: 0.5rem;
+        }
+
+        .operation .hours {
+            font-size: 1rem;
+            color: #4a4a4a;
+            margin-bottom: 0.5rem;
+        }
+
+        .operation .schedule {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Testimonials */
+        .testimonials-section {
+            margin: 3rem 0;
+        }
+
+        .testimonials-section h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #2c2418;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .testimonial-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .testimonial {
+            background: #faf9f8;
+            padding: 1.5rem;
+            border-radius: 12px;
+            border-left: 4px solid #b45f2b;
+        }
+
+        .testimonial p {
+            font-size: 0.95rem;
+            color: #2c2418;
+            margin-bottom: 0.5rem;
+            line-height: 1.5;
+        }
+
+        .testimonial p:first-child {
+            font-style: italic;
+        }
+
+        .testimonial p:first-child:before {
+            content: '"';
+            font-size: 1rem;
+            color: #b45f2b;
+        }
+
+        .testimonial p:first-child:after {
+            content: '"';
+            font-size: 1rem;
+            color: #b45f2b;
+        }
+
+        .testimonial .author {
+            font-weight: 600;
+            color: #b45f2b;
+            margin-top: 0.5rem;
+            font-style: normal;
+        }
+
+        /* Spudtacular Info */
+        .info-section {
+            background: #faf9f8;
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .info-section h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #b45f2b;
+            margin-bottom: 0.5rem;
+        }
+
+        .info-section p {
+            color: #4a4a4a;
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        footer {
+            background: #f5f5f5;
+            margin-top: 3rem;
+            padding: 2rem;
+            border-top: 1px solid #e5e5e5;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h4 {
+            color: #b45f2b;
+            margin-bottom: 0.8rem;
+            font-size: 1rem;
+        }
+
+        .footer-section a, .footer-section p {
+            display: block;
+            color: #666;
+            text-decoration: none;
+            margin: 0.4rem 0;
+            font-size: 0.85rem;
+            cursor: pointer;
+        }
+
+        .footer-section a:hover {
+            color: #b45f2b;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid #e5e5e5;
+            color: #666;
+            font-size: 0.8rem;
+        }
+
+        /* Menu Items Grid */
+        .menu-items-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .menu-item-card {
+            background: #faf9f8;
+            border-radius: 16px;
+            padding: 1.5rem;
+            transition: transform 0.2s;
+        }
+
+        .menu-item-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .menu-item-card img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+        }
+
+        .menu-item-card h4 {
+            font-size: 1rem;
+            color: #2c2418;
+            margin-bottom: 0.5rem;
+        }
+
+        .menu-item-card .item-price {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #b45f2b;
+            margin: 0.5rem 0;
+        }
+
+        .menu-item-card button {
+            background: #b45f2b;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: 500;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .menu-item-card button:hover {
+            background: #9a4f22;
+        }
+
+        /* Add Ons */
+        .addons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 0.5rem;
+            background: #faf9f8;
+            padding: 1.5rem;
+            border-radius: 16px;
+            margin: 1rem 0;
+        }
+
+        .addon-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem;
+            border-bottom: 1px solid #e5e5e5;
+            font-size: 0.9rem;
+        }
+
+        /* Cart & Checkout */
+        .cart-container, .checkout-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+        }
+
+        .cart-items {
+            background: #faf9f8;
+            border-radius: 16px;
+            padding: 1.5rem;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .cart-summary {
+            background: #faf9f8;
+            border-radius: 16px;
+            padding: 1.5rem;
+        }
+
+        .btn {
+            background: #b45f2b;
+            color: white;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            width: 100%;
+            margin-top: 0.5rem;
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #b45f2b;
+            border: 1px solid #b45f2b;
+        }
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            .container {
+                padding: 1rem;
+            }
+            .cart-container, .checkout-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="nav-container">
+            <div class="logo">SPUDTACULAR</div>
+            <div class="nav-links">
+                <a onclick="showPage('home')" class="active" id="nav-home">Home</a>
+                <a onclick="showPage('menu')" id="nav-menu">Menu</a>
+                <a onclick="showPage('cart')" id="nav-cart">Cart 🛒</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- HOME PAGE -->
+    <div id="home-page" class="page active">
+        <div class="container">
+            <div class="welcome">
+                <h1>Welcome to Spudtacular</h1>
+            </div>
+
+            <!-- Menu Section -->
+            <div class="menu-section">
+                <h2>Our Menu</h2>
+                <p class="description">Try our signature loaded jacket potatoes with premium toppings and fresh ingredients. We've made improvements to our recipes to deliver even richer flavor.</p>
+                <p class="price-start">Starts at <strong>₱99</strong></p>
+                <button class="order-btn" onclick="showPage('menu')">Order Now</button>
+                <p class="quality-text">Quality you can savor.</p>
+            </div>
+
+            <!-- Best Seller -->
+            <div class="best-seller">
+                <h3>Best Seller</h3>
+                <p>Our most popular item—loaded jacket potatoes with premium toppings and fresh ingredients.</p>
+            </div>
+
+            <!-- Operation Hours -->
+            <div class="operation">
+                <h3>OPERATION DAY/TIME</h3>
+                <p class="hours">We're open daily from 12:00 NN to 8:00 PM — ready to serve you fresh every Monday to Saturday!</p>
+            </div>
+
+            <!-- Testimonials -->
+            <div class="testimonials-section">
+                <h2>What Our Customers Say</h2>
+                <div id="testimonials-list" class="testimonial-list"></div>
+            </div>
+
+            <!-- Info Section -->
+            <div class="info-section">
+                <h3>Spudtacular</h3>
+                <p>Your destination for the finest jacket potatoes in town.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- MENU PAGE -->
+    <div id="menu-page" class="page">
+        <div class="container">
+            <div class="welcome">
+                <h1>Our Menu</h1>
+                <p class="description">Try our signature loaded jacket potatoes with premium toppings and fresh ingredients.</p>
+                <p class="price-start">Starts at <strong>₱99</strong></p>
+            </div>
+
+            <h2 style="font-size: 1.3rem; margin: 1rem 0;">Spudtacular Jacket Potato</h2>
+            <div id="full-menu-items" class="menu-items-grid"></div>
+
+            <h2 style="font-size: 1.3rem; margin: 2rem 0 1rem;">Add Ons</h2>
+            <div id="addons-list" class="addons-grid"></div>
+        </div>
+    </div>
+
+    <!-- CART PAGE -->
+    <div id="cart-page" class="page">
+        <div class="container">
+            <h1 style="font-size: 1.8rem; margin-bottom: 1rem;">Your Cart</h1>
+            <div class="cart-container" style="padding: 0;">
+                <div id="cart-items" class="cart-items"></div>
+                <div class="cart-summary">
+                    <h3>Order Summary</h3>
+                    <div style="display: flex; justify-content: space-between; padding: 0.8rem 0;">
+                        <span>Subtotal:</span>
+                        <span id="subtotal">₱0</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; padding: 0.8rem 0; font-weight: 700; color: #b45f2b;">
+                        <span>Total:</span>
+                        <span id="total">₱0</span>
+                    </div>
+                    <button class="btn" onclick="showCheckout()">Proceed to Checkout</button>
+                    <button class="btn btn-secondary" onclick="clearCart()">Clear Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CHECKOUT PAGE -->
+    <div id="checkout-page" class="page">
+        <div class="container">
+            <h1 style="font-size: 1.8rem; margin-bottom: 1rem;">Checkout</h1>
+            <div class="checkout-container" style="padding: 0;">
+                <div class="cart-items">
+                    <h3>Order Summary</h3>
+                    <div id="checkout-summary"></div>
+                    <div style="text-align: right; margin-top: 1rem; padding-top: 1rem; border-top: 2px solid #b45f2b;">
+                        <strong>Total: ₱<span id="checkout-total">0</span></strong>
+                    </div>
+                </div>
+                <div class="cart-summary">
+                    <h3>Delivery Information</h3>
+                    <form id="order-form">
+                        <input type="text" id="customer-name" placeholder="Your Name" style="width: 100%; padding: 0.8rem; margin: 0.5rem 0; border: 1px solid #e5e5e5; border-radius: 8px;">
+                        <input type="email" id="customer-email" placeholder="Phone or Email" style="width: 100%; padding: 0.8rem; margin: 0.5rem 0; border: 1px solid #e5e5e5; border-radius: 8px;">
+                        <textarea id="customer-address" rows="3" placeholder="Delivery Address (optional)" style="width: 100%; padding: 0.8rem; margin: 0.5rem 0; border: 1px solid #e5e5e5; border-radius: 8px;"></textarea>
+                        <button type="submit" class="btn">Place Order</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Spudtacular</h4>
+                <p>Your destination for the finest jacket potatoes in town.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <a onclick="showPage('home')">Home</a>
+                <a onclick="showPage('menu')">Menu</a>
+                <a>About Us</a>
+                <a>Location</a>
+            </div>
+            <div class="footer-section">
+                <h4>Follow Us</h4>
+                <p>Facebook</p>
+                <p>Instagram</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Spudtacular. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Menu Data
+        const menuItems = [
+            { id: 1, name: "Plain Butter & Cheese", price: 99, image: "plain.jpg" },
+            { id: 2, name: "Cheese and Beans", price: 135, image: "cnb.jpg" },
+            { id: 3, name: "Cheese and Tuna", price: 135, image: "cnt.jpg" },
+            { id: 4, name: "Cheese and Creamy Mushroom Chicken", price: 170, image: "mushroom.jpg" },
+            { id: 5, name: "Cheese and Chili Con Carne", price: 175, image: "cnchili.jpg" },
+            { id: 6, name: "Cheese with Bacon & Ham", price: 145, image: "cnh.jpg" },
+            { id: 7, name: "Cheese with Beans & Tuna", price: 165, image: "beans.jpg" }
+        ];
+
+        const addons = [
+            { name: "Cheddarella", price: 30 },
+            { name: "Butter", price: 10 },
+            { name: "Sriracha", price: 10 },
+            { name: "Crispy Onion", price: 10 },
+            { name: "Chili Flakes", price: 5 },
+            { name: "Cheese Sauce", price: 20 },
+            { name: "Chili Garlic Sauce", price: 20 }
+        ];
+
+        const testimonials = [
+            { author: "Emma K.", text: "The best jacket potatoes I've ever had! The combination of perfectly crispy skin and fluffy inside, paired with fresh toppings, is unbeatable." },
+            { author: "David R.", text: "I visit Spudtacular multiple times a week. The team is friendly, the food is fantastic, and it's become my favorite lunch spot!" },
+            { author: "Lisa T.", text: "Great quality, creative options, and fair prices. Spudtacular has elevated the humble jacket potato to an art form!" }
+        ];
+
+        let cart = JSON.parse(localStorage.getItem('spud-cart') || '[]');
+
+        function saveCart() {
+            localStorage.setItem('spud-cart', JSON.stringify(cart));
+            updateCartCount();
+        }
+
+        function updateCartCount() {
+            const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const cartLink = document.getElementById('nav-cart');
+            if (cartLink) {
+                cartLink.innerHTML = count > 0 ? `Cart 🛒(${count})` : 'Cart 🛒';
+            }
+        }
+
+        function addToCart(id, name, price) {
+            const existing = cart.find(item => item.id === id);
+            if (existing) {
+                existing.quantity++;
+            } else {
+                cart.push({ id, name, price, quantity: 1 });
+            }
+            saveCart();
+            alert(`${name} added to cart!`);
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            saveCart();
+            renderCart();
+        }
+
+        function updateQuantity(index, newQuantity) {
+            if (newQuantity < 1) {
+                removeFromCart(index);
+                return;
+            }
+            cart[index].quantity = newQuantity;
+            saveCart();
+            renderCart();
+        }
+
+        function clearCart() {
+            if (confirm('Clear entire cart?')) {
+                cart = [];
+                saveCart();
+                renderCart();
+            }
+        }
+
+        function renderCart() {
+            const container = document.getElementById('cart-items');
+            if (!container) return;
+
+            if (cart.length === 0) {
+                container.innerHTML = '<div style="text-align: center; padding: 2rem;">Your cart is empty. <a onclick="showPage(\'menu\')" style="color: #b45f2b; cursor: pointer;">Browse Menu</a></div>';
+                document.getElementById('subtotal').textContent = '₱0';
+                document.getElementById('total').textContent = '₱0';
+                return;
+            }
+
+            let subtotal = 0;
+            container.innerHTML = cart.map((item, index) => {
+                subtotal += item.price * item.quantity;
+                return `
+                    <div class="cart-item">
+                        <div>
+                            <strong>${item.name}</strong>
+                            <p style="color: #b45f2b;">₱${item.price}</p>
+                        </div>
+                        <div style="display: flex; gap: 0.5rem; align-items: center;">
+                            <button onclick="updateQuantity(${index}, ${item.quantity - 1})" style="background: #e5e5e5; border: none; width: 30px; height: 30px; border-radius: 50%; cursor: pointer;">-</button>
+                            <span>${item.quantity}</span>
+                            <button onclick="updateQuantity(${index}, ${item.quantity + 1})" style="background: #e5e5e5; border: none; width: 30px; height: 30px; border-radius: 50%; cursor: pointer;">+</button>
+                            <button onclick="removeFromCart(${index})" style="background: #ffebee; border: none; padding: 0.3rem 0.8rem; border-radius: 20px; cursor: pointer;">Remove</button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            document.getElementById('subtotal').textContent = `₱${subtotal}`;
+            document.getElementById('total').textContent = `₱${subtotal}`;
+        }
+
+        function showCheckout() {
+            if (cart.length === 0) {
+                alert('Your cart is empty');
+                return;
+            }
+            renderCheckoutSummary();
+            showPage('checkout');
+        }
+
+        function renderCheckoutSummary() {
+            const container = document.getElementById('checkout-summary');
+            let total = 0;
+            container.innerHTML = cart.map(item => {
+                total += item.price * item.quantity;
+                return `<div style="display: flex; justify-content: space-between; padding: 0.5rem 0;"><span>${item.name} x${item.quantity}</span><span>₱${item.price * item.quantity}</span></div>`;
+            }).join('');
+            document.getElementById('checkout-total').textContent = total;
+        }
+
+        function showPage(pageName) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById(`${pageName}-page`).classList.add('active');
+            
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            if (pageName === 'home') document.querySelector('.nav-links a[onclick="showPage(\'home\')"]').classList.add('active');
+            if (pageName === 'menu') {
+                document.querySelector('.nav-links a[onclick="showPage(\'menu\')"]').classList.add('active');
+                renderFullMenu();
+            }
+            if (pageName === 'cart') {
+                document.querySelector('.nav-links a[onclick="showPage(\'cart\')"]').classList.add('active');
+                renderCart();
+            }
+        }
+
+        function renderFullMenu() {
+            const container = document.getElementById('full-menu-items');
+            container.innerHTML = menuItems.map(item => `
+                <div class="menu-item-card">
+                    <img src="/images/${item.image}" alt="${item.name}" onerror="this.src='https://placehold.co/300x200/f5f5f5/b45f2b?text=🥔'">
+                    <h4>${item.name}</h4>
+                    <p class="item-price">₱${item.price}</p>
+                    <button onclick="addToCart(${item.id}, '${item.name}', ${item.price})">Add to Cart</button>
+                </div>
+            `).join('');
+
+            const addonsContainer = document.getElementById('addons-list');
+            addonsContainer.innerHTML = addons.map(addon => `
+                <div class="addon-item">
+                    <span>${addon.name}</span>
+                    <span style="color: #b45f2b;">+₱${addon.price}</span>
+                </div>
+            `).join('');
+        }
+
+        function renderTestimonials() {
+            const container = document.getElementById('testimonials-list');
+            container.innerHTML = testimonials.map(t => `
+                <div class="testimonial">
+                    <p>${t.text}</p>
+                    <div class="author">- ${t.author}</div>
+                </div>
+            `).join('');
+        }
+
+        document.getElementById('order-form')?.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('✅ Order placed successfully! Thank you for ordering from Spudtacular!\n\nWe will contact you shortly for confirmation.');
+            cart = [];
+            saveCart();
+            showPage('home');
+        });
+
+        renderTestimonials();
+        updateCartCount();
+    </script>
+</body>
+</html>

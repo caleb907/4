@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spudtacular | Customize</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">🥔 SPUDTACULAR</div>
+            <ul class="nav-menu">
+                <li><a href="/">Home</a></li>
+                <li><a href="/menu.html">Menu</a></li>
+                <li><a href="/customize.html" class="active">Customize</a></li>
+                <li><a href="/cart.html">Cart 🛒</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <section class="page-header">
+            <h1>Customize Your Jacket Potato</h1>
+            <p>Build your perfect spud with your favorite toppings!</p>
+        </section>
+
+        <div class="customize-container">
+            <div class="customize-form">
+                <div class="customize-section">
+                    <h3>Select Base Size</h3>
+                    <div id="base-sizes" class="options-group"></div>
+                </div>
+
+                <div class="customize-section">
+                    <h3>Choose Your Main Topping</h3>
+                    <div id="main-toppings" class="options-group"></div>
+                </div>
+
+                <div class="customize-section">
+                    <h3>Add Extra Toppings</h3>
+                    <div id="extra-toppings" class="options-group"></div>
+                </div>
+
+                <div class="customize-summary">
+                    <h3>Your Custom Potato</h3>
+                    <div id="custom-summary"></div>
+                    <div class="total-price">Total: ₱<span id="total-price">0</span></div>
+                    <button class="btn btn-primary" onclick="addCustomToCart()">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>🥔 Spudtacular — The art of jacket potato</p>
+            <p>© 2026 Spudtacular. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        let selectedBase = null;
+        let selectedMain = null;
+        let selectedExtras = [];
+        let menuItems = [];
+        let addons = [];
+        let baseSizes = [];
+
+        // Load data
+        Promise.all([
+            fetch('/api/menu').then(r => r.json()),
+            fetch('/api/addons').then(r => r.json()),
+            fetch('/api/base-sizes').then(r => r.json())
+        ]).then(([menu, addonsData, sizes]) => {
+            menuItems = menu;
+            addons = addonsData;
+            baseSizes = sizes;
+            
+            renderBaseSizes();
+            renderMainToppings();
+            renderExtraToppings();
+        });
+
+        function renderBaseSizes() {
+            const container = document.getElementById('base-sizes');
+            container.innerHTML = baseSizes.map(size => `
+                <label class="option-card">
+                    <input type="radio" name="base" value="${size.id}" data-price="${size.price}" data-name="${size.name}">
+                    <div>
+                        <strong>${size.name}</strong>
+                        <span class="price">₱${size.price}</span>
+                    </div>
+                </label>
+            `).join('');
+            
+            document.querySelectorAll('input[name="base"]').forEach(radio => {
+                radio.addEventListener('change', (e) => {
+                    selectedBase = {
+                        id: parseInt(e.target.value),
+                        name: e.target.dataset.name,
+                        price: parseInt(e.target.dataset.price)
+                    };
+                    updateSummary();
+                });
+            });
+        }
+
+        function renderMainToppings() {
+            const mainItems = menuItems.filter(m => m.category !== 'classic');
+            const container = document.getElementById('main-toppings');
+            container.innerHTML = mainItems.map(item => `
+                <label class="option-card">
+                    <input type="radio" name="main" value="${item.id}" data-price="${item.price}" data-name="${item.name}">
+                    <div>
+                        <strong>${item.name}</strong>
+                        <span class="price">₱${item.price}</span>
+                    </div>
+                </label>
+            `).join('');
+            
+            document.querySelectorAll('input[name="main"]').forEach(radio => {
+                radio.addEventListener('change', (e) => {
+                    selectedMain = {
+                        id: parseInt(e.target.value),
+                        name: e.target.dataset.name,
+                        price: parseInt(e.target.dataset.price)
+                    };
+                    updateSummary();
+                });
+            });
+        }
+
+        function renderExtraToppings() {
+            const container = document.getElementById('extra-toppings');
+            container.innerHTML = addons.map(addon => `
+                <label class="option-card checkbox">
+                    <input type="checkbox" value="${addon.id}" data-price="${addon.price}" data-name="${addon.name}">
+                    <div>
+                        <span>${addon.name}</span>
+                        <span class="price">+₱${addon.price}</span>
+                    </div>
+                </label>
+            `).join('');
+            
+            document.querySelectorAll('#extra-toppings input[type="checkbox"]').forEach(checkbox => {
+                checkbox.addEventListener('change', (e) => {
+                    if (e.target.checked) {
+                        selectedExtras.push({
+                            id: parseInt(e.target.value),
+                            name: e.target.dataset.name,
+                            price: parseInt(e.target.dataset.price)
+                        });
+                    } else {
+                        selectedExtras = selectedExtras.filter(e => e.id != e.target.value);
+                    }
+                    updateSummary();
+                });
+            });
+        }
+
+        function updateSummary() {
+            let total = 0;
+            let summaryHtml = '';
+            
+            if (selectedBase) {
+                total += selectedBase.price;
+                summaryHtml += `<p><strong>Base:</strong> ${selectedBase.name} - ₱${selectedBase.price}</p>`;
+            }
+            
+            if (selectedMain) {
+                total += selectedMain.price;
+                summaryHtml += `<p><strong>Main:</strong> ${selectedMain.name} - ₱${selectedMain.price}</p>`;
+            }
+            
+            if (selectedExtras.length > 0) {
+                summaryHtml += `<p><strong>Extras:</strong></p><ul>`;
+                selectedExtras.forEach(extra => {
+                    total += extra.price;
+                    summaryHtml += `<li>${extra.name} +₱${extra.price}</li>`;
+                });
+                summaryHtml += `</ul>`;
+            }
+            
+            document.getElementById('custom-summary').innerHTML = summaryHtml || '<p>Please select your options</p>';
+            document.getElementById('total-price').textContent = total;
+        }
+
+        function addCustomToCart() {
+            if (!selectedBase || !selectedMain) {
+                alert('Please select a base size and main topping');
+                return;
+            }
+            
+            const total = parseInt(document.getElementById('total-price').textContent);
+            const item = {
+                id: Date.now(),
+                name: `Custom: ${selectedBase.name} + ${selectedMain.name}`,
+                price: total,
+                quantity: 1,
+                customizations: {
+                    base: selectedBase,
+                    main: selectedMain,
+                    extras: selectedExtras
+                }
+            };
+            
+            let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            cart.push(item);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            alert('Added to cart!');
+            window.location.href = '/cart.html';
+        }
+    </script>
+</body>
+</html>
