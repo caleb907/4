@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "author": "Emma K.",
+    "text": "The best jacket potatoes I've ever had! The combination of perfectly crispy skin and fluffy inside, paired with fresh toppings, is unbeatable.",
+    "rating": 5,
+    "created_at": "2026-03-21T15:33:30.469Z"
+  },
+  {
+    "id": 2,
+    "author": "David R.",
+    "text": "I visit Spudtacular multiple times a week. The team is friendly, the food is fantastic, and it's become my favorite lunch spot!",
+    "rating": 5,
+    "created_at": "2026-03-21T15:33:30.470Z"
+  },
+  {
+    "id": 3,
+    "author": "Lisa T.",
+    "text": "Great quality, creative options, and fair prices. Spudtacular has elevated the humble jacket potato to an art form!",
+    "rating": 5,
+    "created_at": "2026-03-21T15:33:30.470Z"
+  }
+]
